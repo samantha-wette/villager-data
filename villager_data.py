@@ -17,11 +17,9 @@ def all_species(filename):
         line = line.split('|')
         all_species.add(line[1])
 
-    # TODO: replace this with your code
     print(all_species)
     return all_species
 
-#all_species('villagers.csv')
 
 def get_villagers_by_species(filename, search_string="All"):
     """Return a list of villagers' names by species.
@@ -45,10 +43,8 @@ def get_villagers_by_species(filename, search_string="All"):
             villagers.append(line[0])
 
         
-    print(sorted(villagers))
     return sorted(villagers)
 
-#get_villagers_by_species('villagers.csv', 'Cat')
 
 
 def all_names_by_hobby(filename):
@@ -61,7 +57,6 @@ def all_names_by_hobby(filename):
         - list[list[str]]: a list of lists containing names
     """
 
-    # TODO: replace this with your code
     fitness_list = []
     nature_list = []
     education_list = []
@@ -88,9 +83,7 @@ def all_names_by_hobby(filename):
             play_list.append(villager_name)
             
     hobby_list = [sorted(fitness_list), sorted(nature_list), sorted(education_list), sorted(music_list), sorted(fashion_list), sorted(play_list)]
-    print(hobby_list)
     return hobby_list
-#all_names_by_hobby('villagers.csv')
 
 def all_data(filename):
     """Return all the data in a file.
@@ -112,9 +105,7 @@ def all_data(filename):
         line_data = tuple(line)
         all_data.append(line_data)
     
-    print(all_data)
     return all_data
-#all_data('villagers.csv')
 
 
 def find_motto(filename, villager_name='Default'):
@@ -131,7 +122,6 @@ def find_motto(filename, villager_name='Default'):
         - str: the villager's motto or None
     """
 
-    # TODO: replace this with your code
     my_file = open(filename)
     
     if villager_name == 'Default':
@@ -142,10 +132,7 @@ def find_motto(filename, villager_name='Default'):
         name = line[0]
         motto = line[4]
         if name == villager_name:
-            print(motto)
             return motto
-find_motto('villagers.csv', 'Chow')
-
 
 def find_likeminded_villagers(filename, villager_name):
     """Return a set of villagers with the same personality as the given villager.
@@ -162,4 +149,21 @@ def find_likeminded_villagers(filename, villager_name):
         {'Bella', ..., 'Carmen'}
     """
 
-    # TODO: replace this with your code
+    likeminded_villagers = set()
+
+    my_file = open(filename)
+
+    for line in my_file:
+        line = line.split('|')
+        
+        if line[0] == villager_name:
+            personality = line[2]
+            break
+
+    for line in my_file:
+        line = line.split('|')
+
+        if line[2] == personality:
+            likeminded_villagers.add(line[0])
+    
+    return likeminded_villagers
