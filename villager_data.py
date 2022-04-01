@@ -21,7 +21,7 @@ def all_species(filename):
     print(all_species)
     return all_species
 
-all_species('villagers.csv')
+#all_species('villagers.csv')
 
 def get_villagers_by_species(filename, search_string="All"):
     """Return a list of villagers' names by species.
@@ -48,7 +48,7 @@ def get_villagers_by_species(filename, search_string="All"):
     print(sorted(villagers))
     return sorted(villagers)
 
-get_villagers_by_species('villagers.csv', 'Cat')
+#get_villagers_by_species('villagers.csv', 'Cat')
 
 
 def all_names_by_hobby(filename):
@@ -62,9 +62,35 @@ def all_names_by_hobby(filename):
     """
 
     # TODO: replace this with your code
+    fitness_list = []
+    nature_list = []
+    education_list = []
+    music_list = []
+    fashion_list = []
+    play_list = []
 
-    return []
-
+    my_file = open(filename)
+    for line in my_file:
+        line = line.split('|')
+        villager_name = line[0]
+        villager_hobby = line[3]
+        if villager_hobby == "Fitness":
+            fitness_list.append(villager_name)
+        elif villager_hobby == "Nature":
+            nature_list.append(villager_name)
+        elif villager_hobby == "Education":
+            education_list.append(villager_name)
+        elif villager_hobby == "Music":
+            music_list.append(villager_name)
+        elif villager_hobby == "Fashion":
+            fashion_list.append(villager_name)
+        elif villager_hobby == "Play":
+            play_list.append(villager_name)
+            
+    hobby_list = [sorted(fitness_list), sorted(nature_list), sorted(education_list), sorted(music_list), sorted(fashion_list), sorted(play_list)]
+    print(hobby_list)
+    return hobby_list
+#all_names_by_hobby('villagers.csv')
 
 def all_data(filename):
     """Return all the data in a file.
@@ -78,15 +104,20 @@ def all_data(filename):
     Return:
         - list[tuple[str]]: a list of tuples containing strings
     """
-
+    my_file = open(filename)
+    
     all_data = []
-
-    # TODO: replace this with your code
-
+    for line in my_file:
+        line = line.split('|')
+        line_data = tuple(line)
+        all_data.append(line_data)
+    
+    print(all_data)
     return all_data
+#all_data('villagers.csv')
 
 
-def find_motto(filename, villager_name):
+def find_motto(filename, villager_name='Default'):
     """Return the villager's motto.
 
     Return None if you're not able to find a villager with the
@@ -101,6 +132,19 @@ def find_motto(filename, villager_name):
     """
 
     # TODO: replace this with your code
+    my_file = open(filename)
+    
+    if villager_name == 'Default':
+        return None
+
+    for line in my_file:
+        line = line.split('|')
+        name = line[0]
+        motto = line[4]
+        if name == villager_name:
+            print(motto)
+            return motto
+find_motto('villagers.csv', 'Chow')
 
 
 def find_likeminded_villagers(filename, villager_name):
